@@ -14,7 +14,7 @@ RUN cargo build --release  \
   --config  'profile.release.panic="abort"' \
   --config  'profile.release.codegen-units=1'
 
-FROM debian:stable-slim
+FROM gcr.io/distroless/cc-debian12
 
 COPY --from=build /usr/src/app/target/release/server /usr/src/app/target/release/server
 
