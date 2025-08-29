@@ -6,6 +6,8 @@ WORKDIR /usr/src/app
   COPY '{{source}}' '{{target}}'
 {{/files}}
 
+RUN apt update && apt install -y git
+
 RUN cargo build --release  \
   --config  'profile.release.lto=true' \
   --config  'profile.release.panic="abort"' \
