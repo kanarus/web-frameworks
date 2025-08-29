@@ -6,7 +6,8 @@ WORKDIR /usr/src/app
   COPY '{{source}}' '{{target}}'
 {{/files}}
 
-RUN apt update && apt install -y git
+RUN apt-get -qq update
+RUN apy-get -qy install git
 
 RUN cargo build --release  \
   --config  'profile.release.lto=true' \
