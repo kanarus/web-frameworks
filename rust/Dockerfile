@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 {{/files}}
 
 RUN apt-get -qq update
-RUN apy-get -qy install git
+RUN apt-get -qy install git
 
 RUN cargo build --release  \
   --config  'profile.release.lto=true' \
