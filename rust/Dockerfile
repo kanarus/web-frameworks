@@ -14,6 +14,10 @@ RUN cargo build --release  \
   --config  'profile.release.panic="abort"' \
   --config  'profile.release.codegen-units=1'
 
+### DEBUG ###
+RUN timeout -sKILL 5s ./target/release/server; echo $?
+#############
+
 FROM debian:stable-slim
 
 COPY --from=build /usr/src/app/target/release/server /usr/src/app/target/release/server
