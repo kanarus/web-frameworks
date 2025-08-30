@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 {{/files}}
 
 RUN apt update
-RUN apt install -y --no-install-recommends git pkg-config
+RUN apt install -y --no-install-recommends git pkg-config curl
 RUN rm -rf /var/lib/apt/lists/*
 
 ENV RUSTFLAGS='-C target-cpu=native'
@@ -20,12 +20,14 @@ RUN cargo build --release  \
 RUN timeout -sKILL 5s ./target/release/server; echo "[timeout] exit code: $?"
 #############
 
-FROM debian:stable
+# FROM debian:stable-slim
+FROM gcr.io/distroless/cc-debian12
 
+COPY --from=build /usr/bin/curl /usr/bin/curl
 COPY --from=build /usr/src/app/target/release/server /app/server
 
-RUN apt update
-RUN apt install -y --no-install-recommends curl
+# RUN apt update
+# RUN apt install -y --no-install-recommends curl
 
 ### DEBUG ###
 RUN uname -r
