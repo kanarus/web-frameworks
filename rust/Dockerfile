@@ -9,6 +9,7 @@ WORKDIR /usr/src/app
 RUN apt-get -qq update
 RUN apt-get -qy install git pkg-config
 
+ENV RUSTFLAGS="-C target-cpu=native"
 RUN cargo build --release  \
   --config  'profile.release.lto=true' \
   --config  'profile.release.panic="abort"' \
