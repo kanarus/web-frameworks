@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 RUN apt-get -qq update
 RUN apt-get -qy install git pkg-config
 
-ENV RUSTFLAGS="-C target-cpu=native"
+ENV RUSTFLAGS='-C target-cpu=native'
 RUN cargo build --release  \
   --config  'profile.release.lto=true' \
   --config  'profile.release.panic="abort"' \
@@ -19,7 +19,7 @@ RUN cargo build --release  \
 RUN timeout -sKILL 5s ./target/release/server; echo "[timeout] exit code: $?"
 #############
 
-FROM debian:stable-slim
+FROM gcr.io/distroless/cc-debian12
 
 COPY --from=build /usr/src/app/target/release/server /usr/src/app/target/release/server
 
