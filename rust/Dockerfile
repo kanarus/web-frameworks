@@ -19,7 +19,7 @@ RUN cargo build --release  \
 RUN timeout -sKILL 5s ./target/release/server; echo "[timeout] exit code: $?"
 #############
 
-FROM gcr.io/distroless/cc-debian12
+FROM debian:stable
 
 COPY --from=build /usr/src/app/target/release/server /usr/src/app/target/release/server
 
