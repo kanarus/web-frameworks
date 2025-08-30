@@ -21,7 +21,7 @@ RUN timeout -sKILL 5s ./target/release/server; echo "[timeout] exit code: $?"
 
 FROM debian:stable
 
-COPY --from=build /usr/src/app/target/release/server /usr/src/app/target/release/server
+COPY --from=build /usr/src/app/target/release/server /app/server
 
 RUN apt-get -qq update
 RUN apt-get -qy install curl

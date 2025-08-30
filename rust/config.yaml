@@ -7,7 +7,7 @@ language:
 
   engines:
     default:
-      command: /usr/src/app/target/release/server
+      command: /app/server
 
 framework:
   engines:
