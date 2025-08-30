@@ -30,8 +30,9 @@ COPY --from=build /usr/src/app/target/release/server /app/server
 # RUN apt install -y --no-install-recommends curl
 
 ### DEBUG ###
-RUN uname -r
-RUN {{command}}
+# RUN uname -r
+# RUN {{command}}
+CMD [ "{{command}}" ]
 #############
 
 # ENTRYPOINT {{command}}
