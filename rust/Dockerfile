@@ -6,8 +6,8 @@ WORKDIR /usr/src/app
   COPY '{{source}}' '{{target}}'
 {{/files}}
 
-RUN apt-get -qq update
-RUN apt-get -qy install git pkg-config
+RUN apt update
+RUN apt install -y --no-install-recommends git pkg-config
 RUN rm -rf /var/lib/apt/lists/*
 
 ENV RUSTFLAGS='-C target-cpu=native'
@@ -24,8 +24,8 @@ FROM debian:stable
 
 COPY --from=build /usr/src/app/target/release/server /app/server
 
-RUN apt-get -qq update
-RUN apt-get -qy install curl
+RUN apt update
+RUN apt install -y --no-install-recommends curl
 
 ### DEBUG ###
 RUN uname -r
