@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 {{/files}}
 
 RUN apt-get -qq update
-RUN apt-get -qy install git
+RUN apt-get -qy install git pkg-config
 
 RUN cargo build --release  \
   --config  'profile.release.lto=true' \
@@ -15,7 +15,7 @@ RUN cargo build --release  \
   --config  'profile.release.codegen-units=1'
 
 ### DEBUG ###
-RUN timeout -sKILL 5s ./target/release/server; echo $?
+RUN timeout -sKILL 5s ./target/release/server; echo "[timeout] exit code: $?"
 #############
 
 FROM debian:stable-slim
